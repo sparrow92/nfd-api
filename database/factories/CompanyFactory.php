@@ -18,7 +18,7 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'nip' => $this->faker->unique()->numerify('##############'),
+            'nip' => $this->faker->unique()->numerify('##########'),
             'address' => $this->faker->streetAddress,
             'city' => $this->faker->city,
             'postcode' => $this->faker->postcode,

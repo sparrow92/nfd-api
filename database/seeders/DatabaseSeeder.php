@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $companies = Company::factory(10)->create();
-       Employee::factory(100)->create([
-            'company_id' => $companies->random()->id,
+       $companies = Company::factory(50)->create();
+       Employee::factory(1000)->create([
+          'company_id' => $companies->random()->id,
        ]);
     }
 }
