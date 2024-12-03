@@ -41,8 +41,36 @@ class AppInit extends Command
 
       $this->info('Generowanie klucza aplikacji...');
       $this->call('key:generate');
+
+      $this->info('Generowanie klucza API...');
+      $this->installApiKey();
   
       $this->info('Inicjalizacja zakończona pomyślnie!');
       return Command::SUCCESS;
+    }
+
+    protected function installApiKey()
+    {
+      $apiKey = bin2hex(random_bytes(32));
+      $envFile = base_path('.env');
+
+      if (file_exists($envFile)) {
+        $envContent = file_get_contents($envFile);
+        $pattern = '/^API_KEY=.*$/m';
+
+        if (preg_match($pattern, $envContent)) {
+          $envContent = preg_replace($pattern, "API_KEY={$apiKey}", $envContent);
+        } else {
+          $envContent .= "\nAPI_KEY={$apiKey}";
+        }
+
+        file_put_contents($envFile, $envContent);
+
+        $this->info('Klucz API został zapisany w pliku .env.');
+      } else {
+        $this->error('Nie znaleziono pliku .env!');
+      }
+
+      $this->info("Wygenerowany klucz API: {$apiKey}");
     }
 }
