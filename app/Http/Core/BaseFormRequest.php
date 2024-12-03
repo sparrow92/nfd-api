@@ -25,7 +25,7 @@ abstract class BaseFormRequest extends FormRequest
   {
     throw new HttpResponseException(response()->json([
       'message' => 'Wystąpiły błędy walidacji.',
-      'errors' => $validator->errors(), // Zwrócenie wszystkich błędów
+      'errors' => $validator->errors(),
     ], 422));
   }
 

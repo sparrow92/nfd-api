@@ -19,7 +19,7 @@ class CompanyController extends Controller
   public function index(Request $request)
   {
     $perPage = $request->input('per_page');
-    $companies = Company::paginate($perPage);
+    $companies = Company::latest()->paginate($perPage);
 
     return CompanyResource::collection($companies);
   }

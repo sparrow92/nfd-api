@@ -20,7 +20,7 @@ class EmployeeController extends Controller
   public function index(Request $request)
   {
     $perPage = $request->input('per_page');
-    $employees = Employee::paginate($perPage);
+    $employees = Employee::latest()->paginate($perPage);
 
     return EmployeeResource::collection($employees);
   }
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
     }
 
     $perPage = $request->input('per_page');
-    $employees = Employee::where('company_id', $company->id)->paginate($perPage);
+    $employees = Employee::where('company_id', $company->id)->latest()->paginate($perPage);
 
     return EmployeeResource::collection($employees);
   }
