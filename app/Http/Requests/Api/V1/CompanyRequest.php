@@ -13,9 +13,11 @@ class CompanyRequest extends BaseFormRequest
      */
     public function rules(): array
     {
+      $id = $this->route('id');
+
       return [
         'name' => ['required', 'max:255'],
-        'nip' => ['required', 'digits_between:10,11', 'unique:companies,nip'],
+        'nip' => ['required', 'digits_between:10,11', 'unique:companies,nip,' . $id],
         'address' => ['required', 'max:255'],
         'city' => ['required', 'max:255'],
         'postcode' => ['required', 'regex:/^\d{2}-\d{3}$/'],

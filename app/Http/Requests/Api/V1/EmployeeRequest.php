@@ -13,11 +13,13 @@ class EmployeeRequest extends BaseFormRequest
      */
     public function rules(): array
     {
+      $id = $this->route('id');
+
       return [
         'first_name' => ['required', 'max:255', 'alpha'],
         'last_name' => ['required', 'max:255', 'alpha'],
-        'email' => ['required', 'email', 'max:255', 'unique:employees,email'],
-        'phone_number' => ['nullable', 'unique:employees,phone_number', 'regex:/^\+?[0-9\s\-\(\)]{9,15}$/'],
+        'email' => ['required', 'email', 'max:255', 'unique:employees,email,' . $id],
+        'phone_number' => ['nullable', 'unique:employees,phone_number,' . $id, 'regex:/^\+?[0-9\s\-\(\)]{9,15}$/'],
       ];
     }
 }
