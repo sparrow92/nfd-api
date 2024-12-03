@@ -11,10 +11,19 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller
 {
   /**
-   * Lista firm
+   * @OA\Get(
+   *    path="/api/v1/companies",
+   *    tags={"Companies"},
+   *    description="Pobieranie listy firm",
    * 
-   * @param \Illuminate\Http\Request $request
-   * @return \App\Http\Resources\Api\V1\Company\CompanyResource
+   *    @OA\Parameter(name="per_page", in="query", description="Wyników na stronie", required=false, @OA\Schema(type="integer")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie pobrano listę firm"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy firm"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function index(Request $request)
   {
@@ -25,10 +34,29 @@ class CompanyController extends Controller
   }
 
   /**
-   * Dodawanie firmy
+   * @OA\Post(
+   *    path="/api/v1/companies",
+   *    tags={"Companies"},
+   *    description="Tworzenie nowej firmy",
    * 
-   * @param \App\Http\Requests\Api\V1\CompanyRequest $request
-   * @return \App\Http\Resources\Api\V1\Company\CompanyResource
+   *    @OA\RequestBody(
+   *      required=true,
+   *      @OA\JsonContent(
+   *        required={"name", "nip", "address", "city", "postcode"},
+   *        @OA\Property(property="name", type="string", example="No Friday Deploys"),
+   *        @OA\Property(property="nip", type="string", example="98765432109"),
+   *        @OA\Property(property="address", type="string", example="Kościuszki 12"),
+   *        @OA\Property(property="city", type="string", example="Kraków"),
+   *        @OA\Property(property="postcode", type="string", example="30-055"),
+   *      )
+   *    ),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie pobrano listę firm"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy firm"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function store(CompanyRequest $request)
   {
@@ -44,10 +72,19 @@ class CompanyController extends Controller
   }
 
   /**
-   * Wyświetlanie firmy
+   * @OA\Get(
+   *    path="/api/v1/companies/{id}",
+   *    tags={"Companies"},
+   *    description="Pobieranie danych firmy o podanym ID",
    * 
-   * @param int $id
-   * @return \App\Http\Resources\Api\V1\Company\CompanyResource
+   *    @OA\Parameter(name="id", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie pobrano dane firmy"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania danych firmy"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function show($id)
   {
@@ -63,11 +100,31 @@ class CompanyController extends Controller
   }
 
   /**
-   * Aktualizacja firmy
+   * @OA\Put(
+   *    path="/api/v1/companies/{id}",
+   *    tags={"Companies"},
+   *    description="Aktualizacja danych firmy o podanym ID",
    * 
-   * @param \App\Http\Requests\Api\V1\CompanyRequest $request
-   * @param int $id
-   * @return \App\Http\Resources\Api\V1\Company\CompanyResource
+   *    @OA\Parameter(name="id", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\RequestBody(
+   *      required=true,
+   *      @OA\JsonContent(
+   *        required={"name", "nip", "address", "city", "postcode"},
+   *        @OA\Property(property="name", type="string", example="No Friday Deploys"),
+   *        @OA\Property(property="nip", type="string", example="98765432109"),
+   *        @OA\Property(property="address", type="string", example="Kościuszki 12"),
+   *        @OA\Property(property="city", type="string", example="Kraków"),
+   *        @OA\Property(property="postcode", type="string", example="30-055"),
+   *      )
+   *    ),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie zaktualizowano dane firmy"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas aktualizacji danych firmy"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function update(CompanyRequest $request, $id)
   {
@@ -91,10 +148,19 @@ class CompanyController extends Controller
   }
 
   /**
-   * Usuwanie firmy
+   * @OA\Delete(
+   *    path="/api/v1/companies/{id}",
+   *    tags={"Companies"},
+   *    description="Usuwanie firmy o podanym ID",
    * 
-   * @param int $id
-   * @return \Illuminate\Http\JsonResponse
+   *    @OA\Parameter(name="id", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie usunięto firmę"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas usuwania firmy"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function destroy($id)
   {

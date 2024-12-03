@@ -12,10 +12,19 @@ use Illuminate\Http\Request;
 class EmployeeController extends Controller
 {
   /**
-   * Lista pracowników
+   * @OA\Get(
+   *    path="/api/v1/employees",
+   *    tags={"Employees"},
+   *    description="Pobieranie listy wszystkich pracowników",
    * 
-   * @param \Illuminate\Http\Request $request
-   * @return \App\Http\Resources\Api\V1\Employee\EmployeeResource
+   *    @OA\Parameter(name="per_page", in="query", description="Wyników na stronie", required=false, @OA\Schema(type="integer")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie pobrano listę wszystkich pracowników"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy wszystkich pracowników"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function index(Request $request)
   {
@@ -26,11 +35,20 @@ class EmployeeController extends Controller
   }
 
   /**
-   * Lista pracowników po firmie
+   * @OA\Get(
+   *    path="/api/v1/companies/{companyId}/employees",
+   *    tags={"Employees"},
+   *    description="Pobieranie listy pracowników danej firmy",
    * 
-   * @param \Illuminate\Http\Request $request
-   * @param int $companyId
-   * @return \App\Http\Resources\Api\V1\Employee\EmployeeResource
+   *    @OA\Parameter(name="companyId", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="per_page", in="query", description="Wyników na stronie", required=false, @OA\Schema(type="integer")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie pobrano listę pracowników firmy"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy pracowników firmy"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function indexByCompany(Request $request, $companyId)
   {
@@ -49,11 +67,30 @@ class EmployeeController extends Controller
   }
 
   /**
-   * Dodawanie pracownika
+   * @OA\Post(
+   *    path="/api/v1/companies/{companyId}/employees",
+   *    tags={"Employees"},
+   *    description="Tworzenie nowego pracownika w firmie",
    * 
-   * @param int $companyId
-   * @param \App\Http\Requests\Api\V1\EmployeeRequest $request
-   * @return \App\Http\Resources\Api\V1\Employee\EmployeeResource
+   *    @OA\Parameter(name="companyId", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\RequestBody(
+   *      required=true,
+   *      @OA\JsonContent(
+   *        required={"first_name", "last_name", "email"},
+   *        @OA\Property(property="first_name", type="string", example="Jan"),
+   *        @OA\Property(property="last_name", type="string", example="Kowalski"),
+   *        @OA\Property(property="email", type="string", example="jan@kowalski.pl"),
+   *        @OA\Property(property="phone_number", type="string", example="123456789"),
+   *      )
+   *    ),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie utworzono pracownika w firmie"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas tworzenia pracownika w firmie"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function store(EmployeeRequest $request, $companyId)
   {
@@ -77,10 +114,19 @@ class EmployeeController extends Controller
   }
 
   /**
-   * Wyświetlanie pracownika
+   * @OA\Get(
+   *    path="/api/v1/employees/{id}",
+   *    tags={"Employees"},
+   *    description="Pobieranie danych pracownika",
    * 
-   * @param int $id
-   * @return \App\Http\Resources\Api\V1\Employee\EmployeeResource
+   *    @OA\Parameter(name="id", in="path", description="UUID pracownika", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie pobrano dane pracownika"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania danych pracownika"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function show($id)
   {
@@ -96,11 +142,30 @@ class EmployeeController extends Controller
   }
 
   /**
-   * Aktualizacja pracownika
+   * @OA\Put(
+   *    path="/api/v1/employees/{id}",
+   *    tags={"Employees"},
+   *    description="Aktualizacja danych pracownika",
    * 
-   * @param \App\Http\Requests\Api\V1\EmployeeRequest $request
-   * @param int $id
-   * @return \App\Http\Resources\Api\V1\Employee\EmployeeResource
+   *    @OA\Parameter(name="id", in="path", description="UUID pracownika", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\RequestBody(
+   *      required=true,
+   *      @OA\JsonContent(
+   *        required={"first_name", "last_name", "email"},
+   *        @OA\Property(property="first_name", type="string", example="Jan"),
+   *        @OA\Property(property="last_name", type="string", example="Kowalski"),
+   *        @OA\Property(property="email", type="string", example="jan@kowalski.pl"),
+   *        @OA\Property(property="phone_number", type="string", example="123456789"),
+   *      )
+   *    ),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie zaktualizowano dane pracownika"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas aktualizowania danych pracownika"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function update(EmployeeRequest $request, $id)
   {
@@ -124,10 +189,19 @@ class EmployeeController extends Controller
   }
 
   /**
-   * Usuwanie pracownika
+   * @OA\Delete(
+   *    path="/api/v1/employees/{id}",
+   *    tags={"Employees"},
+   *    description="Usuwanie pracownika",
    * 
-   * @param int $id
-   * @return \Illuminate\Http\JsonResponse
+   *    @OA\Parameter(name="id", in="path", description="UUID pracownika", required=true, @OA\Schema(type="string")),
+   * 
+   *    @OA\Response(response=200, description="Pomyślnie usunięto pracownika"),
+   *    @OA\Response(response=400, description="Wystąpił błąd podczas usuwania pracownika"),
+   *    @OA\Response(response=401, description="Brak autoryzacji"),
+   *    @OA\Response(response=422, description="Błąd walidacji"),
+   *    security={{"api_key":{}}}
+   * )
    */
   public function destroy($id)
   {

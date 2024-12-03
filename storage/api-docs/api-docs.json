@@ -1,0 +1,595 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel API",
+        "description": "Laravel API description",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/api/v1/companies": {
+            "get": {
+                "tags": [
+                    "Companies"
+                ],
+                "description": "Pobieranie listy firm",
+                "operationId": "707a45d5190cbbe1b43f69f6e5d0131d",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Wyników na stronie",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie pobrano listę firm"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas pobierania listy firm"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Companies"
+                ],
+                "description": "Tworzenie nowej firmy",
+                "operationId": "8c4a1d582268449c242009ff20c2dfe7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "nip",
+                                    "address",
+                                    "city",
+                                    "postcode"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "No Friday Deploys"
+                                    },
+                                    "nip": {
+                                        "type": "string",
+                                        "example": "98765432109"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Kościuszki 12"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Kraków"
+                                    },
+                                    "postcode": {
+                                        "type": "string",
+                                        "example": "30-055"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie pobrano listę firm"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas pobierania listy firm"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/companies/{id}": {
+            "get": {
+                "tags": [
+                    "Companies"
+                ],
+                "description": "Pobieranie danych firmy o podanym ID",
+                "operationId": "f0f1a3d86918a593a0aaa37a0c9fb1c3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID firmy",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie pobrano dane firmy"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas pobierania danych firmy"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Companies"
+                ],
+                "description": "Aktualizacja danych firmy o podanym ID",
+                "operationId": "e1521de8d65f0ab70f079174789b8b9c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID firmy",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "nip",
+                                    "address",
+                                    "city",
+                                    "postcode"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "No Friday Deploys"
+                                    },
+                                    "nip": {
+                                        "type": "string",
+                                        "example": "98765432109"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Kościuszki 12"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Kraków"
+                                    },
+                                    "postcode": {
+                                        "type": "string",
+                                        "example": "30-055"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie zaktualizowano dane firmy"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas aktualizacji danych firmy"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Companies"
+                ],
+                "description": "Usuwanie firmy o podanym ID",
+                "operationId": "4b2b739cc0dc94bdc5feebb74e4e9914",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID firmy",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie usunięto firmę"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas usuwania firmy"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "description": "Pobieranie listy wszystkich pracowników",
+                "operationId": "326f2e86fa40a9ba88b1cb5f2d4b62b8",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Wyników na stronie",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie pobrano listę wszystkich pracowników"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas pobierania listy wszystkich pracowników"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/companies/{companyId}/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "description": "Pobieranie listy pracowników danej firmy",
+                "operationId": "7969eca19d5be5850d46b86a9d7b0885",
+                "parameters": [
+                    {
+                        "name": "companyId",
+                        "in": "path",
+                        "description": "UUID firmy",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Wyników na stronie",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie pobrano listę pracowników firmy"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas pobierania listy pracowników firmy"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "description": "Tworzenie nowego pracownika w firmie",
+                "operationId": "eb9a3325d39ace99a8f8b21ba329ff49",
+                "parameters": [
+                    {
+                        "name": "companyId",
+                        "in": "path",
+                        "description": "UUID firmy",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Jan"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Kowalski"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "jan@kowalski.pl"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie utworzono pracownika w firmie"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas tworzenia pracownika w firmie"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/employees/{id}": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "description": "Pobieranie danych pracownika",
+                "operationId": "b7cb6100cedcac60d8c23d3f9d7c3251",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID pracownika",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie pobrano dane pracownika"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas pobierania danych pracownika"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Employees"
+                ],
+                "description": "Aktualizacja danych pracownika",
+                "operationId": "bcdffcad24dd066f489c0e6ed83861a5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID pracownika",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Jan"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Kowalski"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "jan@kowalski.pl"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie zaktualizowano dane pracownika"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas aktualizowania danych pracownika"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "description": "Usuwanie pracownika",
+                "operationId": "43aa0966dc246d0b0373a7db65a6bf78",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID pracownika",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pomyślnie usunięto pracownika"
+                    },
+                    "400": {
+                        "description": "Wystąpił błąd podczas usuwania pracownika"
+                    },
+                    "401": {
+                        "description": "Brak autoryzacji"
+                    },
+                    "422": {
+                        "description": "Błąd walidacji"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "description": "Klucz API używany do uwierzytelniania",
+                "name": "x-api-key",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Companies",
+            "description": "Companies"
+        },
+        {
+            "name": "Employees",
+            "description": "Employees"
+        }
+    ]
+}
