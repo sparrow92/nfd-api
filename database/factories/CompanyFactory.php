@@ -21,7 +21,7 @@ class CompanyFactory extends Factory
             'nip' => $this->faker->unique()->numerify('##############'),
             'address' => $this->faker->streetAddress,
             'city' => $this->faker->city,
-            'postal_code' => $this->faker->postcode,
+            'postcode' => $this->faker->postcode,
         ];
     }
 }

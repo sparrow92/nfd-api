@@ -13,6 +13,7 @@ class Company extends Model
   protected $primaryKey = 'id';
   public $incrementing = false;
   protected $keyType = 'string'; 
+  protected $fillable = ['name', 'nip', 'address', 'city', 'postcode'];
 
   public function employees()
   {

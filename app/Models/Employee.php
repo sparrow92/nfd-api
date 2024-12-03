@@ -13,6 +13,7 @@ class Employee extends Model
   protected $primaryKey = 'id';
   public $incrementing = false;
   protected $keyType = 'string'; 
+  protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'company_id'];
 
   public function company()
   {
