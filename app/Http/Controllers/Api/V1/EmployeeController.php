@@ -84,7 +84,7 @@ class EmployeeController extends Controller
    */
   public function show($id)
   {
-    $employee = Employee::find($id);
+    $employee = Employee::with('company')->find($id);
 
     if (!$employee) {
       return response()->json([
