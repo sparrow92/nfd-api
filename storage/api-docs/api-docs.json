@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Laravel API",
-        "description": "Laravel API description",
+        "title": "NFD API",
+        "description": "API do zarządzania firmami i pracownikami",
         "version": "1.0.0"
     },
     "servers": [
