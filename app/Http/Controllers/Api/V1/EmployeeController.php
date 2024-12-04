@@ -18,6 +18,7 @@ class EmployeeController extends Controller
    *    description="Pobieranie listy wszystkich pracowników",
    * 
    *    @OA\Parameter(name="per_page", in="query", description="Wyników na stronie", required=false, @OA\Schema(type="integer")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie pobrano listę wszystkich pracowników"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy wszystkich pracowników"),
@@ -42,6 +43,7 @@ class EmployeeController extends Controller
    * 
    *    @OA\Parameter(name="companyId", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
    *    @OA\Parameter(name="per_page", in="query", description="Wyników na stronie", required=false, @OA\Schema(type="integer")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie pobrano listę pracowników firmy"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy pracowników firmy"),
@@ -56,7 +58,7 @@ class EmployeeController extends Controller
 
     if (!$company) {
       return response()->json([
-        'message' => 'Firma o podanym ID nie istnieje.',
+        'message' => __('company.not_found'),
       ], 404);
     }
 
@@ -73,6 +75,7 @@ class EmployeeController extends Controller
    *    description="Tworzenie nowego pracownika w firmie",
    * 
    *    @OA\Parameter(name="companyId", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\RequestBody(
    *      required=true,
@@ -98,7 +101,7 @@ class EmployeeController extends Controller
 
     if (!$company) {
       return response()->json([
-        'message' => 'Firma o podanym ID nie istnieje.',
+        'message' => __('company.not_found'),
       ], 404);
     }
 
@@ -106,7 +109,7 @@ class EmployeeController extends Controller
       $employee = Employee::create(array_merge($request->all(), ['company_id' => $company->id]));
     } catch (\Exception $e) {
       return response()->json([
-        'message' => 'Wystąpił błąd podczas dodawania pracownika.',
+        'message' => __('employee.store_error'),
       ], 400);
     }
 
@@ -120,6 +123,7 @@ class EmployeeController extends Controller
    *    description="Pobieranie danych pracownika",
    * 
    *    @OA\Parameter(name="id", in="path", description="UUID pracownika", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie pobrano dane pracownika"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania danych pracownika"),
@@ -134,7 +138,7 @@ class EmployeeController extends Controller
 
     if (!$employee) {
       return response()->json([
-        'message' => 'Pracownik o podanym ID nie istnieje.',
+        'message' => __('employee.not_found'),
       ], 404);
     }
 
@@ -148,6 +152,7 @@ class EmployeeController extends Controller
    *    description="Aktualizacja danych pracownika",
    * 
    *    @OA\Parameter(name="id", in="path", description="UUID pracownika", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\RequestBody(
    *      required=true,
@@ -173,7 +178,7 @@ class EmployeeController extends Controller
 
     if (!$employee) {
       return response()->json([
-        'message' => 'Pracownik o podanym ID nie istnieje.',
+        'message' => __('employee.not_found'),
       ], 404);
     }
 
@@ -181,7 +186,7 @@ class EmployeeController extends Controller
       $employee->update($request->all());
     } catch (\Exception $e) {
       return response()->json([
-        'message' => 'Wystąpił błąd podczas aktualizacji pracownika.',
+        'message' => __('employee.update_error'),
       ], 400);
     }
 
@@ -195,6 +200,7 @@ class EmployeeController extends Controller
    *    description="Usuwanie pracownika",
    * 
    *    @OA\Parameter(name="id", in="path", description="UUID pracownika", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie usunięto pracownika"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas usuwania pracownika"),
@@ -208,7 +214,7 @@ class EmployeeController extends Controller
     $employee = Employee::find($id);
     if (!$employee) {
       return response()->json([
-        'message' => 'Pracownik o podanym ID nie istnieje.',
+        'message' => __('employee.not_found'),
       ], 404);
     }
 
@@ -216,12 +222,12 @@ class EmployeeController extends Controller
       $employee->delete();
     } catch (\Exception $e) {
       return response()->json([
-        'message' => 'Wystąpił błąd podczas usuwania pracownika.',
+        'message' => __('employee.delete_error'),
       ], 400);
     }
 
     return response()->json([
-      'message' => 'Pracownik został usunięty.',
+      'message' => __('employee.deleted'),
     ], 200);
   }
 }

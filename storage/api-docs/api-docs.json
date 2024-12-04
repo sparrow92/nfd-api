@@ -28,6 +28,20 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -56,6 +70,22 @@
                 ],
                 "description": "Tworzenie nowej firmy",
                 "operationId": "8c4a1d582268449c242009ff20c2dfe7",
+                "parameters": [
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -132,6 +162,20 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -168,6 +212,20 @@
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
                         }
                     }
                 ],
@@ -245,6 +303,20 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -283,6 +355,20 @@
                         "required": false,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
                         }
                     }
                 ],
@@ -332,6 +418,20 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -368,6 +468,20 @@
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
                         }
                     }
                 ],
@@ -441,6 +555,20 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -477,6 +605,20 @@
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
                         }
                     }
                 ],
@@ -547,6 +689,20 @@
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Język",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pl",
+                                "en",
+                                "es"
+                            ]
                         }
                     }
                 ],

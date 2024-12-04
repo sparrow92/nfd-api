@@ -24,7 +24,7 @@ abstract class BaseFormRequest extends FormRequest
   protected function failedValidation(Validator $validator)
   {
     throw new HttpResponseException(response()->json([
-      'message' => 'Wystąpiły błędy walidacji.',
+      'message' => __('validation.errors'),
       'errors' => $validator->errors(),
     ], 422));
   }
@@ -37,31 +37,31 @@ abstract class BaseFormRequest extends FormRequest
   public function messages(): array
   {
     return [
-      'name.required' => 'Nazwa jest wymagana.',
-      'name.max' => 'Nazwa nie może mieć więcej niż 255 znaków.',
-      'nip.required' => 'NIP jest wymagany.',
-      'nip.digits_between' => 'NIP musi mieć od 10 do 11 cyfr.',
-      'nip.unique' => 'NIP musi być unikalny.',
-      'address.required' => 'Adres jest wymagany.',
-      'address.max' => 'Adres nie może mieć więcej niż 255 znaków.',
-      'city.required' => 'Miasto jest wymagane.',
-      'city.max' => 'Miasto nie może mieć więcej niż 255 znaków.',
-      'postcode.required' => 'Kod pocztowy jest wymagany.',
-      'postcode.regex' => 'Kod pocztowy musi mieć format XX-XXX.',
-      'first_name.required' => 'Imię jest wymagane.',
-      'first_name.alpha' => 'Imię może zawierać tylko litery.',
-      'first_name.max' => 'Imię nie może mieć więcej niż 255 znaków.',
-      'last_name.required' => 'Nazwisko jest wymagane.',
-      'last_name.alpha' => 'Nazwisko może zawierać tylko litery.',
-      'last_name.max' => 'Nazwisko nie może mieć więcej niż 255 znaków.',
-      'email.required' => 'Adres e-mail jest wymagany.',
-      'email.email' => 'Podaj poprawny adres e-mail.',
-      'email.max' => 'Adres e-mail nie może mieć więcej niż 255 znaków.',
-      'email.unique' => 'Adres e-mail musi być unikalny.',
-      'phone_number.regex' => 'Numer telefonu musi mieć poprawny format.',
-      'phone_number.unique' => 'Numer telefonu musi być unikalny.',
-      'company_id.required' => 'ID firmy jest wymagane.',
-      'company_id.exists' => 'Firma o podanym ID nie istnieje.',
+      'name.required' => __('validation.name.required'),
+      'name.max' => __('validation.name.max'),
+      'nip.required' => __('validation.nip.required'),
+      'nip.digits_between' => __('validation.nip.digits_between'),
+      'nip.unique' => __('validation.nip.unique'),
+      'address.required' => __('validation.address.required'),
+      'address.max' => __('validation.address.max'),
+      'city.required' => __('validation.city.required'),
+      'city.max' => __('validation.city.max'),
+      'postcode.required' => __('validation.postcode.required'),
+      'postcode.regex' => __('validation.postcode.regex'),
+      'first_name.required' => __('validation.first_name.required'),
+      'first_name.alpha' => __('validation.first_name.alpha'),
+      'first_name.max' => __('validation.first_name.max'),
+      'last_name.required' => __('validation.last_name.required'),
+      'last_name.alpha' => __('validation.last_name.alpha'),
+      'last_name.max' => __('validation.last_name.max'),
+      'email.required' => __('validation.email.required'),
+      'email.email' => __('validation.email.email'),
+      'email.max' => __('validation.email.max'),
+      'email.unique' => __('validation.email.unique'),
+      'phone_number.regex' => __('validation.phone_number.regex'),
+      'phone_number.unique' => __('validation.phone_number.unique'),
+      'company_id.required' => __('validation.company_id.required'),
+      'company_id.exists' => __('validation.company_id.exists'),
     ];
   }
 }

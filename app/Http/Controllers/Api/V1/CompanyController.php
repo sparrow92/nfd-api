@@ -17,6 +17,7 @@ class CompanyController extends Controller
    *    description="Pobieranie listy firm",
    * 
    *    @OA\Parameter(name="per_page", in="query", description="Wyników na stronie", required=false, @OA\Schema(type="integer")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie pobrano listę firm"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania listy firm"),
@@ -38,6 +39,8 @@ class CompanyController extends Controller
    *    path="/api/v1/companies",
    *    tags={"Companies"},
    *    description="Tworzenie nowej firmy",
+   * 
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\RequestBody(
    *      required=true,
@@ -64,7 +67,7 @@ class CompanyController extends Controller
       $company = Company::create($request->all());
     } catch (\Exception $e) {
       return response()->json([
-        'message' => 'Wystąpił błąd podczas dodawania firmy.',
+        'message' => __('company.store_error'),
       ], 400);
     }
 
@@ -78,6 +81,7 @@ class CompanyController extends Controller
    *    description="Pobieranie danych firmy o podanym ID",
    * 
    *    @OA\Parameter(name="id", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie pobrano dane firmy"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas pobierania danych firmy"),
@@ -92,7 +96,7 @@ class CompanyController extends Controller
 
     if (!$company) {
       return response()->json([
-        'message' => 'Firma o podanym ID nie istnieje.',
+        'message' => __('company.not_found'),
       ], 404);
     }
 
@@ -106,6 +110,7 @@ class CompanyController extends Controller
    *    description="Aktualizacja danych firmy o podanym ID",
    * 
    *    @OA\Parameter(name="id", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\RequestBody(
    *      required=true,
@@ -132,7 +137,7 @@ class CompanyController extends Controller
 
     if (!$company) {
       return response()->json([
-        'message' => 'Firma o podanym ID nie istnieje.',
+        'message' => __('company.not_found'),
       ], 404);
     }
     
@@ -140,7 +145,7 @@ class CompanyController extends Controller
       $company->update($request->all());
     } catch (\Exception $e) {
       return response()->json([
-        'message' => 'Wystąpił błąd podczas aktualizacji firmy.',
+        'message' => __('company.update_error'),
       ], 400);
     }
 
@@ -154,6 +159,7 @@ class CompanyController extends Controller
    *    description="Usuwanie firmy o podanym ID",
    * 
    *    @OA\Parameter(name="id", in="path", description="UUID firmy", required=true, @OA\Schema(type="string")),
+   *    @OA\Parameter(name="lang", in="query", description="Język", required=false, @OA\Schema(type="string", enum={"pl", "en", "es"})),
    * 
    *    @OA\Response(response=200, description="Pomyślnie usunięto firmę"),
    *    @OA\Response(response=400, description="Wystąpił błąd podczas usuwania firmy"),
@@ -168,7 +174,7 @@ class CompanyController extends Controller
 
     if (!$company) {
       return response()->json([
-        'message' => 'Firma o podanym ID nie istnieje.',
+        'message' => __('company.not_found'),
       ], 404);
     }
 
@@ -176,12 +182,12 @@ class CompanyController extends Controller
       $company->delete();
     } catch (\Exception $e) {
       return response()->json([
-        'message' => 'Wystąpił błąd podczas usuwania firmy.',
+        'message' => __('company.delete_error'),
       ], 400);
     }
 
     return response()->json([
-      'message' => 'Firma została usunięta pomyślnie.',
+      'message' => __('company.deleted'),
     ], 200);
   }
 }
